@@ -1,0 +1,197 @@
+﻿/***************************************
+
+                |\___/|
+               ( O . O )
+                |     |
+                | U U |
+               с|__э__э
+
+                  ct
+
+           [ types cotomod ]
+
+               это котэ
+          он есть, но его нет
+        и он делает магию в html5
+
+***************************************/
+
+ct.types = {
+  'genobj' : function (type) {
+    obj = {
+      'x':0,
+      'y':0,
+      'spd':0,
+      'dir':0,
+      'grav':0,
+      'dravdir':0,
+      'depth':0,
+      'type':type,
+      'frame':0,
+      'imgspd':0,
+      'transform':false,
+      'transformx':1,
+      'transformy':1,
+      'transformr':0,
+      'transforma':1,
+      'graph':ct.types[type].graph,
+      'events':ct.types[type].events,
+    };
+    return obj;
+  },
+  'list': { },
+  'make': function (type,x,y) {
+    obj = ct.types.genobj(type);
+    obj.x = x;
+    obj.y = y;
+    
+    if (ct.types.list[type])
+      ct.types.list[type].push(obj);
+    else
+      ct.types.list[type] = [obj];
+      
+    if (ct.layers[ct.types[type].depth])
+      ct.layers[ct.types[type].depth].push(obj);
+    else
+      ct.layers[ct.types[type].depth] = [obj];
+
+    ct.types[type].oncreate.apply(obj);
+  },
+  'move': function (o) {
+    o.xprev = o.x;
+    o.yprev = o.y;
+    if (!o.grav) { o.grav = 0; o.gravdir = 0; }
+    hspd = o.spd * Math.cos(o.dir*Math.PI/-180) + o.grav * Math.cos(o.gravdir*Math.PI/-180);
+    vspd = o.spd * Math.sin(o.dir*Math.PI/-180) + o.grav * Math.sin(o.gravdir*Math.PI/-180);
+    o.x += hspd;
+    o.y += vspd;
+    o.spd = Math.sqrt(hspd*hspd + vspd*vspd);
+    if (o.spd > 0) o.dir = ct.types.ppd(o.xprev,o.yprev,o.x,o.y);
+  },
+  'ppd': function (x1, y1, x2, y2) { 
+    return Math.atan2(y2 - y1, x2 - x1) * -180 / Math.PI; 
+  },
+  'each': function (func) {
+    for (i in ct.layers) {
+      for (k in ct.layers[i]) {
+        func.apply(ct.layers[i][k]);
+      }
+    }
+  },
+};
+/******************* типы *************/
+ct.types.cote = {
+  'oncreate': function () {
+    this.grav = 1;
+    this.gravdir = 270;
+    this.dir = 90;
+    this.spd = 20;
+    this.shape = 'rect';
+    this.left = 30;
+    this.right = 30;
+    this.top = -20;
+    this.bottom = 35; 
+    ct.sound.play('hello');
+  },
+  'events': function () { 
+    this.x = ct.mouse.x;
+    ct.types.move(this);
+    if (vspd > 0) {
+      this.frame = 1;
+      
+      if (ct.place.meet(this,this.x,this.y,'spring')) {
+        this.dir = 90;
+        this.spd = 50;
+        ct.sound.play('joy');
+        ct.types.move(this);
+      }
+      else if (!ct.place.free(this,this.x,this.y,'bat')) {
+        this.dir = 90;
+        this.spd = 25;
+        ct.sound.play('jump');
+        ct.types.move(this);
+      }
+    }
+    else this.frame = 0;
+    ct.draw.copy(this,this.x,this.y);
+    
+    if (this.y > ct.height + 50) {
+      alert('Едрить вы бестолочь!\nТвой счёт: ' + ct.rooms.current.score);
+      ct.rooms.switch('menu');
+    }
+  },
+  'graph':'cote',
+  'depth':10,
+};
+
+ct.types.block1 = {
+  'oncreate': function () {
+    this.x = ct.random.range(120,ct.width-120);
+    this.shape = 'rect';
+    this.ctype = 'bat';
+    this.left = 126;
+    this.right = 126;
+    this.top = 0;
+    this.bottom = 36; 
+    if (ct.random.chance(10))
+    ct.types.make('spring',this.x,this.y);
+  },
+  'events': function () { 
+    ct.draw.copy(this,this.x,this.y);
+    if (this.y > ct.height) this.kill = true;
+  },
+  'graph':'bat1',
+  'depth':5,
+};
+
+ct.types.block2 = {
+  'oncreate': function () {
+    this.x = ct.random.range(120,ct.width-120);
+    this.shape = 'rect';
+    this.ctype = 'bat';
+    this.left = 126;
+    this.right = 126;
+    this.top = 0;
+    this.bottom = 26;
+    this.dir = ct.random.dice(0,180);
+    this.spd = ct.random.dice(3,4,5,6);
+  },
+  'events': function () { 
+    if (this.x < 120) this.dir += 180;
+    if (this.x > ct.width - 120) this.dir += 180;
+    ct.types.move(this);
+    ct.draw.copy(this,this.x,this.y);
+    if (this.y > ct.height) this.kill = true;
+  },
+  'graph':'bat2',
+  'depth':5,
+};
+
+ct.types.spring = {
+  'oncreate': function () {
+    this.x += ct.random.range(-100,100);
+    this.shape = 'rect';
+    this.left = 32;
+    this.right = 32;
+    this.top = 30;
+    this.bottom = 10;
+  },
+  'events': function () { 
+    ct.draw.copy(this,this.x,this.y);
+    if (this.y > ct.height) this.kill = true;
+  },
+  'graph':'spring',
+  'depth':6,
+};
+ct.types.logo = {
+  'oncreate': function () {
+    this.x - ct.width / 2;
+  },
+  'events': function () { 
+    ct.draw.copy(this,this.x,this.y);
+  },
+  'graph':'logo',
+  'depth':6,
+};
+
+ct.libs += ' types';  

@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Космо Мизраил Горыныч</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+  </head>
+  <body>
+    <div role="navigation" class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+            <span class="sr-only">Спрятать</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/" class="navbar-brand">Логово</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Домой</a></li>
+            <li class="active"><a href="/ct/">ct.js</a></li>
+            <li><a href="/contact.html">Контакты</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container" role="main">
+        <h1>
+          <a name="О-котэ" class="anchor" href="#%D0%9E-%D0%BA%D0%BE%D1%82%D1%8D"><span class="octicon octicon-link"></span></a>О котэ</h1>
+          <p>ct (читается как «котэ») – модульная библиотека для гибкой разработки любых html5 приложений посредством Javascript. Несмотря на то, что вместе с ct (далее - котэ) можно писать любые приложения, основным направлением в разработке стали браузерные игры, поэтому давайте называть любое приложение на котэ игрой. В данной библиотеке все данные об игре хранятся в самом canvas элементе – так можно парой мелких поправок в коде разместить на одной странице несколько инстанций ct, или же создавать/выгружать их динамически. Таким образом, вся игра заключается в канвасе, который публикуется под переменной ct: </p>
+
+<pre>&gt; ct 
+&lt; &lt;canvas id="ctcanvas"&gt;&lt;/canvas&gt;</pre>
+
+          <p>Такой канвас называется котоканвасом. Все модули, кроме главного <code>main</code>, представлены в виде прикреплённых к котоканвасу объектов: </p>
+
+<pre>&gt; ct.res 
+&lt; { Object } 
+&gt; ct.types 
+&lt; { Object } </pre>
+
+          <p>Обязательными модулями являются только главный <code>main</code> и ресурсный <code>res</code>. Кстати, каждый модуль в библиотеке ct тоже называются котами, а чтобы их не путать с самой библиотекой, можно использовать термин «котомод».</p>
+
+          <h2>Демо</h2>
+          Есть у нас скромный примерчик:<br />
+          <a href="demo/">Жмяк!</a>
+          
+          <h2>
+          <a name="Термины" class="anchor" href="#%D0%A2%D0%B5%D1%80%D0%BC%D0%B8%D0%BD%D1%8B"><span class="octicon octicon-link"></span></a>Термины</h2>
+          <ul>
+            <li>Котоканвас – элемент canvas, хранящий в себе все котомоды и являющийся самим приложением или игрой.</li>
+            <li>Котомод – присоединяемый модуль библиотеки ct.</li>
+            <li>Атлас – это изображение, в котором размещена вся или часть графики игры. Разумеется, вместо атласов можно использовать и отдельные изображения.</li>
+            <li>Спрайт или рабочая графика – фрагмент атласа с подмножеством кадров. Один и тот же спрайт может использоваться как фон, как тайл, как картинка для копий.</li>
+            <li>Тип – образец для создания копий. При изменении типов в ходе игры изменяются и все копии. Также существуют типы фонов и стилей – это тоже образцы, используемые определёнными котомодами.</li>
+            <li>Копия – то, что бегает, прыгает по экрану, стреляет в другие копии, собирает цветочки-копии и т.п.</li>
+          </ul>
+    </div>
+    
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

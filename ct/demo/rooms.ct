@@ -1,0 +1,105 @@
+﻿/***************************************
+
+                |\___/|
+               ( O . O )
+                |     |
+                | U U |
+               с|__э__э
+
+                  ct
+
+           [ rooms cotomod ]
+
+               это котэ
+          он есть, но его нет
+        и он делает магию в html5
+
+***************************************/
+
+ct.rooms = {};
+ct.rooms.make = function () {
+  for (i in this.objs) {
+    ct.types.make(this.objs[i].type,this.objs[i].x,this.objs[i].y);
+  };
+};
+ct.rooms.switch = function (room) {
+  for (i in ct.layers) {
+    ct.layers[i] = [];
+  };
+  ct.layers = [];
+  ct.types.list = { };
+  ct.rooms.current = ct.rooms[room];
+  ct.rooms.make.apply(ct.rooms.current);
+  ct.setAttribute('width', ct.rooms.current.width);
+  ct.setAttribute('height', ct.rooms.current.height);
+  ct.rooms.current.onstart();
+};
+ct.rooms.starting = 'menu';  
+
+/********************** комнаты **************************/
+ct.rooms.game = {
+  'width': 800,
+  'height': 480,
+  'objs': [{'type':'cote','x':320,'y':450}],
+  'onstart': function () {
+    ct.background.pattern('paper','bg');
+    ct.background.add('paper',0);
+    ct.types.make('block1',0,100);
+    ct.types.make('block1',0,200);
+    ct.types.make('block1',0,300);
+    ct.types.make('block1',0,400);
+    ct.types.make('block1',0,500);
+    ct.types.make('block1',0,600);
+  },
+  'passed': 0,
+  'score': 0,
+  'nextbat': 100,
+  'events':function () {
+    if (ct.types.list['cote'][0].y < 250) {
+      d = 250 - ct.types.list['cote'][0].y;
+      ct.types.each(function(){
+        this.y += d;
+      });
+      this.score += d;
+      this.passed += d;
+      if (this.passed > this.nextbat) {
+        this.passed = this.passed % this.nextbat;
+        this.nextbat = ct.random.dice(50,75,100,125,150);
+        ct.types.make(ct.random.dice('block1','block1','block2'),0,-30);
+      }
+    }
+    ct.x.globalAlpha = 1;
+    ct.x.font = '24px cursive';
+    ct.x.fillStyle = '#000000';
+    ct.x.lineWidth = 0;
+    ct.x.textBaseline = 'top';
+    ct.x.textAlign = 'right';
+    ct.draw.text('Счёт: ' + this.score,ct.width-15,15);
+  },
+};
+
+ct.rooms.menu = {
+  'width': 800,
+  'height': 480,
+  'objs': [{'type':'logo','x':400,'y':200}],
+  'onstart': function () {
+    ct.background.pattern('paper','bg');
+    ct.background.add('paper',0);
+  },
+  'events':function () {
+    ct.x.globalAlpha = 1;
+    ct.x.font = '48px cursive';
+    if (ct.place.check['rect.point'](400-100,400-32,400+100,400+32,ct.mouse.x,ct.mouse.y)) {
+      ct.x.fillStyle = '#FF0000';
+      if (ct.mouse.released)
+        ct.rooms.switch('game');
+    } else
+      ct.x.fillStyle = '#000000';
+    ct.x.lineWidth = 0;
+    ct.x.textBaseline = 'middle';
+    ct.x.textAlign = 'center';
+    ct.draw.text('Играть!',ct.width/2,400);
+  },
+};
+
+ct.libs += ' rooms';

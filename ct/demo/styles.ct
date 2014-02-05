@@ -1,0 +1,74 @@
+﻿/***************************************
+
+                |\___/|
+               ( O . O )
+                |     |
+                | U U |
+               с|__э__э
+
+                  ct
+
+           [ styles cotomod ]
+
+               это котэ
+          он есть, но его нет
+        и он делает магию в html5
+
+
+***************************************/
+
+ct.styles = {
+  'types': { },
+  'new': function (name,fill,stroke,text,shadow) {
+    var style = {
+      'lineWidth': 0,
+      'shadowColor': 'rgba(0,0,0,0)',
+      'shadowBlur': 0,
+      'shadowOffsetX': '0',
+      'shadowOffsetY': '0',
+    };
+    if (fill) {
+      if (fill.type == 'solid') {
+        style.fillStyle = fill.color;
+      } else if (fill.type == 'radgrad') {
+        var grad = ct.x.createRadialGradient(fill.r,fill.r,0,0,0,fill.r);
+        for (k in fill.colors) {
+          grad.addColorStop(fill.colors[k].pos,fill.colors[k].color);
+        };
+        style.fillStyle = grad;
+      } else if (fill.type == 'grad') {
+        var grad = ct.x.createLinearGradient(fill.x1,fill.y1,fill.x2,fill.y2);
+        for (k in fill.colors) {
+          grad.addColorStop(fill.colors[k].pos,fill.colors[k].color);
+        };
+        style.fillStyle = grad;
+      } else if (fill.type == 'pattern') {
+        style.fillStyle = ct.background.types[name];
+      }
+    }
+    if (stroke) {
+      style.strokeStyle = stroke.color;
+      style.lineWidth = stroke.width;
+    }
+    if (text) {
+      style.font = text.size + 'px ' + text.family;
+      if (text.valign) style.textBaseline = text.valign;
+      if (text.halign) style.textAlign = text.halign;
+    }
+    if (shadow) {
+      style.shadowColor = shadow.color;
+      style.shadowOffsetX = shadow.x;
+      style.shadowOffsetY = shadow.y;
+      style.shadowBlur = shadow.blur;
+    }
+    ct.styles.types[name] = style;
+    return style;
+  },
+  'set': function (name) {
+    for (k in ct.styles.types[name]) {
+      ct.x[k] = ct.styles.types[name][k];
+    }
+  }, 
+};
+
+ct.libs += " styles";

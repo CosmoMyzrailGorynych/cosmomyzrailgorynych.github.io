@@ -1,0 +1,60 @@
+﻿/***************************************
+
+                |\___/|
+               ( O . O )
+                |     |
+                | U U |
+               с|__э__э
+
+                  ct
+
+        [ forumotion cotomod ]
+
+               это котэ
+          он есть, но его нет
+        и он делает магию в html5
+
+***************************************/
+
+ct.forumotion = {
+  'set': function (field, data, uid) {
+    var b = "active=1&user=" + $user.id,
+      c = document.getElementById("logout").href,
+      c = c.substring(c.indexOf("tid=") + 4, c.indexOf("&key")),
+      b = b + ("&tid=" + c + '&content=[["' + field + '", "' + encodeURIComponent(data) + '"]]&id='),
+      b = b + a.substring(a.lastIndexOf("_") + 1);
+    $.post("/ajax_profile.forum?jsoncallback=jQuery1", b);
+  },
+  'get': function (field, func, uid) {
+    var omg = function () {
+      func($('#ctcontainerforumotion').html());
+    };
+    $('#ctcontainerforumotion').load('/u' + uid ' #' + field + ' .field_uneditable', function () {
+      omg();
+    });
+  },
+  'friends': function (uid, func) {
+    var omg = function () {
+      var friends = [];
+      $('#ctcontainerforumotion ol > li').each(function() {
+        var fr = { };
+        fr.name = $(this).find('.message-header a').text();
+        fr.avatar = $(this).find('.avatar img')[0].src;
+        fr.link = $(this).find('.message-header a')[0].href;
+        fr.group = $(this).find('.message-text a')[0].href.split('-')[0].split('/')[3].replace('g','')
+      });
+      func(friends);
+    };
+    $('#ctcontainerforumotion').load('/u' + uid 'friends #profile-advanced-details ol', function () {
+      omg();
+    });
+  },
+  'chat': function (mes) {
+    if (mes)
+      $.post('/chatbox/chatbox_actions.forum','mode=send&sent=' + encodeURIComponent(mes));
+    else
+      $.post('/chatbox/chatbox_actions.forum','mode=send&sent=');
+  },
+};
+
+ct.libs += ' forumotion';

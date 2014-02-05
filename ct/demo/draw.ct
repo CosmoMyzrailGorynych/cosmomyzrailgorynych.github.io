@@ -1,0 +1,61 @@
+﻿/***************************************
+
+                |\___/|
+               ( O . O )
+                |     |
+                | U U |
+               с|__э__э
+
+                  ct
+
+            [ draw cotomod ]
+
+               это котэ
+          он есть, но его нет
+        и он делает магию в html5
+
+
+***************************************/
+
+ct.draw = {
+  'circle': function (x,y,r,o) {
+    ct.x.beginPath();
+    ct.x.arc(x,y,r,0,2*Math.PI);  
+    if (o) ct.x.stroke(); else ct.x.fill();
+  },
+  'line': function (x,y,xx,yy) {
+    ct.x.beginPath();
+    ct.x.moveTo(x,y);
+    ct.x.lineTo(xx,yy);
+    ct.x.stroke();
+  },
+  'image': function (img,imgindex,x,y) {
+    ct.x.drawImage(ct.graphs[img].atlas,ct.graphs[img].frames[imgindex][0],ct.graphs[img].frames[imgindex][1],ct.graphs[img].width,ct.graphs[img].height,x-ct.graphs[img].x,y-ct.graphs[img].y,ct.graphs[img].width,ct.graphs[img].height);
+  },
+  'imgext': function (img,imgindex,x,y,hs,vs,r,a) {
+    var temp = ct.x.globalAlpha;
+    ct.x.save();
+    ct.x.globalAlpha = a;
+    ct.x.translate(x,y);
+    ct.x.rotate(r*Math.PI/180);
+    ct.x.drawImage(ct.graphs[img].atlas,ct.graphs[img].frames[imgindex][0],ct.graphs[img].frames[imgindex][1],ct.graphs[img].width,ct.graphs[img].height,-ct.graphs[img].x*hs,-ct.graphs[img].y*vs,ct.graphs[img].width*hs,ct.graphs[img].height*vs);
+    ct.x.globalAlpha = temp;
+    ct.x.translate(0,0);
+    ct.x.restore();
+  },
+  'copy': function (copy,x,y) {
+    if(copy.transform) {
+      ct.draw.imgext(copy.graph,copy.frame,x,y,copy.transformx,copy.transformy,copy.transformr,copy.transforma);
+    } else {
+      ct.draw.image(copy.graph,copy.frame,x,y);
+    }
+  },
+  'text': function (str,x,y) {
+    ct.x.fillText(str,x,y);
+  },
+  'rectangle': function (x,y,xx,yy) {
+    ct.x.fillRect(x,y,xx,yy);
+  },
+};
+
+ct.libs += ' draw';
