@@ -1,7 +1,7 @@
 {
-  "versioncode": 1,
-  "version": "Beta build 1",
-  "new": "Первый релиз, собственно :)",
-  "direct": "",
+  "versioncode": 2,
+  "version": "Beta build 2",
+  "new": "Добавлено автосохранение (раз в 5 минут, создаёт файл autosave.cos в папке с программой)\nДобавлен стабилизатор указателя - он спасёт ваш шедевр от случайных подёргиваний и приступов эпилепсии.\nТеперь можно сохранять и изменять образцы цветов прямо в CosmoPainter.\nДобавлены эллипс, прямоугольники.\nИсправлен баг с неперемещаемыми слоями на тач-устройствах.",
+  "direct": "https://dl.dropboxusercontent.com/u/25234596/cosmopainter/installer.exe",
   "site": "http://cosmopainter.blogspot.com/p/download.html"
 }
