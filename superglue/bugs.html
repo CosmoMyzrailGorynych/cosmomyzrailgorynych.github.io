@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>СУПЕРКЛЕЙ</title>
+  <meta name="description" content="Программа для удобного редактирования и склеивания вашего кода">
+  <meta name="keywords" content="склейка файлов, программа, софт, код, программирование">
+  <meta name="author" content="Космо Мизраил Горыныч">
+  <!-- styles -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/bootstrap-responsive.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css?v=2.1.5" media="screen" />
+</head>
+<body>
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container"><a class="brand" href="/"><img src="img/cosmolabs.png"/></a>
+      <ul class="nav pull-right">
+        <li><a href="/"><i class="icon-user"></i> Логово Космыча</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!--Profile container-->
+<div class="container">
+    <h1>Баги? Срочно доложить!</h1>
+</div>
+<!--END: Profile container-->
+<div class="container">
+  <h2>Группа ВК</h2>
+  <div style="text-align: center;"><a href="http://vk.com/cosmolaboratories"><img src="img/vk.png"></a></div>
+</div>
+<br/><br/><br/><br/><br/><br/>
+<!-- END: Social Icons -->
+<!-- Footer -->
+<div class="footer">
+  <div class="container">
+    <p class="pull-left"><a href="http://www.nersta.ru/">Лаборатории Космо</a></p>
+    <p class="pull-right"><a href="mailto:admin@nersta.ru" role="button" data-toggle="modal"> <i class="icon-mail"></i> Связаться по почте</a></p>
+  </div>
+</div>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="//vk.com/js/api/openapi.js" type="text/javascript" charset="windows-1251"></script>
+<script type="text/javascript">
+  VK.init({
+    apiId: ВАШ_API_ID,
+    onlyWidgets: true
+  });
+</script>
+<div id="vk_comments"></div>
+<script type="text/javascript">
+ VK.Widgets.Comments('vk_comments', {
+  pageUrl: 'http://vk.com/topic-75700392_30896119'
+ });
+</script>
+</body>
+</html>
