@@ -1,0 +1,1 @@
+stylus -c < main.styl > main.css

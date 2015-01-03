@@ -1,0 +1,150 @@
+/* Шрифты */
+fonts = Calibri, Helvetica, sans-serif;
+
+/* Цвета */
+red = #D44F57;
+coral = #D45647;
+
+blue = #1F375D;
+darkblue = #14243D;
+dkdkblue = #101A2C;
+
+vk = #4B73A4;
+ltgrey = #BAB7B6;
+
+/* развёртки */
+transition()
+	-webkit-transition: arguments;
+	-moz-transition: arguments;
+	transition: arguments;
+
+box-shadow()
+	-webkit-box-shadow: arguments;
+	-moz-box-shadow: arguments;
+	box-shadow: arguments;
+
+/* шаблоны */
+trans =
+	-webkit-transition 0.35s ease all
+	-moz-transition 0.35s ease all
+	transition 0.35s ease all
+
+/* поехали */
+html, body {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font: 0.5cm/0.9cm fonts;
+	font-weight: 300;
+	background: blue;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+a {
+	text-decoration: none;
+	color: red;
+	&:hover {
+		color: coral;
+	}
+}
+header {
+	h1 {
+		margin: 0;
+		padding: 1em;
+		text-align: center;
+	}
+	background: red;
+	box-shadow: 0 0.5em darkblue;
+	a {
+		color: white;
+		text-transform: uppercase;
+		font-weight: 300;
+		&:hover {
+			color: white;
+		}
+	}
+}
+main, .block {
+	margin: 0.5em;
+	background: white;
+	box-shadow: 0 0.5em darkblue;
+}
+main {
+	margin: 0 auto 3em;
+	padding: 5em 1em 1em;
+	max-width: 60em;
+	position: relative;
+	box-sizing: border-box;
+	em img {
+		float: right;
+	}
+	h2 {
+		color: #FFF;
+		background: none repeat scroll 0% 0% #D44F57;
+		padding: 0.5em 0px;
+		position: absolute;
+		text-align: center;
+		font-weight: 500;
+		margin: 0;
+		left: 0;
+		right: 0;
+		top: 0.75em;
+		&:before, &:after {
+			position: absolute;
+			top: 1em;
+			content: '.';
+			color: transparent;
+			border: 1.25em #A0363D solid;
+			width: 0;
+			height: 0;
+			display: block;
+		}
+		&:before {
+			right: 100%;
+			border-left-color: transparent;
+			border-right-width: 1.5em;
+		}
+		&:after {
+			left: 100%;
+			border-right-color: transparent;
+			border-left-width: 1.5em;
+		}
+	}
+}
+nav {
+	text-align: center;
+	li {
+		display: inline-block;
+		float: none;
+		margin: 1em 0.5em;
+		a {
+			color: white;
+			padding: 0.25em;
+			{trans}
+			&.selected, &:hover{
+				box-shadow: 0px 2px 0px rgba(255, 255, 255, 0.5);
+				color: white;
+			}
+		}
+	}
+}
+.container {
+	flex: 1;
+	-ms-flex-preferred-size: auto;
+}
+.block {
+	padding: 0.5em;
+}
+footer {
+	text-align: center;
+	background: darkblue;
+	padding: 0.5em 1em;
+	color: white;
+	.block {
+		color: $color;
+		background: blue;
+		box-shadow: 0 0.5em dkdkblue;
+	}
+}
