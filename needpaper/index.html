@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>NeedPaper</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<meta name="description" content="Онлайн-генератор чертёжной бумаги, различных сеток для рисования, ролевых игр, чертежей" />
+		<meta name="keywords" content="сетка, чертёжная бумага, шаблоны, онлайн, генератор" />
+		<meta name="author" content="Космо Мизраил Горыныч" />
+	</head>
+	<body>
+		<aside class="form">
+			<b>Вид сетки</b>
+			<br />
+			<select id="grid" onchange="change();">
+				<optgroup label="Точки">
+					<option value="0">Квадрат</option>
+					<option value="1">Полька</option>
+					<option value="2">Треугольник</option>
+					<option value="3">Изометрический</option>
+					<option value="4">Псевдоизометрия (1:2)</option>
+				</optgroup>
+				<optgroup label="Точки с сеткой">
+					<option value="5">В клетку</option>
+					<option value="6">Ромб</option>
+					<option value="7">Шестиугольник</option>
+					<option value="8">Треугольник</option>
+					<option value="9">Миллиметровка</option>
+					<option value="10">Изометрический</option>
+					<option value="11">Псевдоизометрия (1:2)</option>
+				</optgroup>
+				<optgroup label="Разное">
+					<option value="12">В линейку</option>
+				</optgroup>
+			</select>
+			<br />
+			<b>Формат бумаги</b>
+			<br />
+			<select id="paper" onchange="change();">
+				<optgroup label="Книжная ориентация">
+					<option value="0">А3</option>
+					<option value="1" selected>А4</option>
+					<option value="2">А5</option>
+				</optgroup>
+				<optgroup label="Альбомная ориентация">
+					<option value="3">А3</option>
+					<option value="4">А4</option>
+					<option value="5">А5</option>
+				</optgroup>
+			</select>
+			<br />
+			<b>Размер ячейки</b>
+			<br />
+			<input type="text" id="cellsize" value="0.5" onchange="change();" /> см
+			<br />
+			<label>
+			<input type="checkbox" id="fields" onchange="change();" /> Дополнительные поля</label>
+			<br />
+			<a class="button" onclick="save(this);">Сохранить</a>
+			<a class="button" onclick="prnt(this);">Распечатать*</a>
+			<div class="about">
+				* Многие браузера добавляют при распечатке HTML-страницы свои поля, что может привести к искажению размеров. Рекомендуется сначала сохранить изображение на компьютер, а затем распечатать её в режиме "фотография" (или "Изображение по размеру кадра"). Не забудьте указать формат бумаги!
+				<br />
+				<br />
+				<strong>NeedPaper</strong> - это онлайн-решене для многих дизайнеров, художников, чертёжников и прочих людей, которым необходимы точные рассчёты, но которым не всегда хватает подходящей бумаги. С <b>NeedPaper</b> вы можете прямо сейчас сделать себе бумагу подходящего формата, с нужной сеткой и полями, а затем либо сохранить её для последующего использования, либо сразу распечатать.
+				<br />
+				<br />
+				Поддерживается InternetExplorer 9 и старше, а также другие браузера вроде Mozilla Firefox или Google Chrome. 
+				<br />
+				<br />
+				<b>Размер ячейки</b> указывает на длину грани фигуры (квадрат, треугольник, гекс), за исключением псевдоизометрии - в ней размер ячейки указывает на длину вертикальной диагонали.
+				<br />
+				<br />
+				Кстати, <b>псевдоизометрия отличается от изометрии обычной</b> - в первой используется такой размер сетки, чтобы на один вертикальный пиксел приходилось два горизонтальных. Такие используются в пиксель-арте и в дизайне игр. Вторая - оригинальныя изометрическая, у которой между всеми осями (X,Y,Z) угол равен 120°. Она используется в черчении и архитектуре.
+				<br />
+				<br />
+				Если вам понравился данный он-лайн сервис, пожалуйста, расскажите о нём своим друзьям!
+			</div>
+			<div class="linking">
+				Поделись! 
+				<script type="text/javascript" src="http://yastatic.net/share/share.js" charset="utf-8"></script><div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"></div>
+			</div>
+		</aside>
+		<section class="main">
+			<div id="preview"></div>
+		</section>
+		<a class="home" href="/">Сайт автора</a>
+		<script type="text/javascript" src="js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,147 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon/icomoon.eot?-rdnm34');
+	src:url('../fonts/icomoon/icomoon.eot?#iefix-rdnm34') format('embedded-opentype'),
+		url('../fonts/icomoon/icomoon.woff?-rdnm34') format('woff'),
+		url('../fonts/icomoon/icomoon.ttf?-rdnm34') format('truetype'),
+		url('../fonts/icomoon/icomoon.svg?-rdnm34#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+div.cs-skin-boxes, button {
+    background: none repeat scroll 0% 0% transparent;
+    font-size: 1.25em;
+    color: #524E4F;
+    max-width: 10em;
+    font-weight: 400;
+    margin: 0.2em 0.3em;
+}
+
+@media screen and (max-width: 30em) {
+	div.cs-skin-boxes { font-size: 1em; }
+}
+
+.cs-skin-boxes > span {
+	background: #fff;
+	border: 4px solid #524e4f;
+}
+
+.cs-skin-boxes > span::after,
+.cs-skin-boxes.cs-active > span::after {
+	font-family: 'icomoon';
+	top: auto;
+	-webkit-transform: none;
+	transform: none;
+	content: '\e014';
+}
+
+.cs-skin-boxes .cs-options {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	overflow: auto;
+	background: #F0F0E9;
+	font-size: 75%;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s, visibility 0s 0.3s;
+	transition: opacity 0.3s, visibility 0s 0.3s;
+}
+
+.cs-skin-boxes.cs-active .cs-options {
+	opacity: 1;
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+}
+
+.cs-skin-boxes .cs-options ul {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.cs-skin-boxes .cs-options li {
+	width: 25%;
+	height: 50%;
+	float: left;
+	position: relative;
+	cursor: pointer;
+	border-radius: 16px;
+	overflow: hidden;
+	opacity: 0;
+	border: 10px solid transparent;
+	background-clip: padding-box;
+	-webkit-transform: scale3d(0.8,0.8,1);
+	transform: scale3d(0.8,0.8,1);
+	box-shadow: inset 0 -6em 0 -2em #fff;
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+	box-sizing: border-box;
+}
+
+@media screen and (max-width: 30em) {
+	.cs-skin-boxes .cs-options li { box-shadow: none; border-width: 3px; border-radius: 8px;}
+}
+
+.cs-skin-boxes.cs-active .cs-options li {
+	opacity: 1;
+	-webkit-transform: scale3d(1,1,1);
+	transform: scale3d(1,1,1);
+}
+
+.cs-skin-boxes .cs-options li.cs-selected::after {
+	font-family: 'icomoon';
+	content: '\e00d';
+	color: #fff;
+	position: absolute;
+	font-size: 2em;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate3d(-50%,-50%,0) translate3d(0,-1em,0);
+	transform: translate3d(-50%,-50%,0) translate3d(0,-1em,0);
+}
+.cs-skin-boxes li.cs-optgroup {
+    width: 100%;
+    height: 50%;
+    box-sizing: border-box;
+}
+.cs-select li.cs-optgroup ul {
+    padding-bottom: 4.5em !important;
+    box-sizing: border-box;
+}
+
+.cs-skin-boxes .cs-options li.cs-selected span::after {
+	content: '';
+}
+
+@media screen and (max-width: 30em) {
+	.cs-skin-boxes .cs-options li.cs-selected::after { 
+		-webkit-transform: translate3d(-50%,-50%,0);
+		transform: translate3d(-50%,-50%,0);
+	}
+}
+
+.cs-skin-boxes .cs-options li.color-588c75 {
+	background-color: #F0F0E9;
+}
+
+.cs-skin-boxes .cs-options span {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	line-height: 2em;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+@media screen and (max-width: 30em) {
+	.cs-skin-boxes .cs-options span { display: none; }
+}
+
+.cs-skin-boxes .cs-options li span:hover,
+.cs-skin-boxes li.cs-focus span,
+.cs-skin-boxes li.cs-selected span {
+	color: #333;
+}
