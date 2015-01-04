@@ -52,7 +52,7 @@ a {
 header {
 	h1 {
 		margin: 0;
-		padding: 1em;
+		padding: 0.5em 1em;
 		text-align: center;
 	}
 	background: red;
@@ -63,6 +63,19 @@ header {
 		font-weight: 300;
 		&:hover {
 			color: white;
+		}
+		&:before {
+			content: '.';
+			color: transparent;
+			display: inline-block;
+			vertical-align: middle;
+			width: 2.5em;
+			height: 2.5em;
+			border-radius: 0.35em;
+			border: 0.1em solid #fff;
+			background: blue url(/images/hive.png);
+			margin-right: 0.5em;
+			background-size: 100%;
 		}
 	}
 }
@@ -143,7 +156,7 @@ footer {
 	padding: 0.5em 1em;
 	color: white;
 	.block {
-		color: $color;
+		color: white;
 		background: blue;
 		box-shadow: 0 0.5em dkdkblue;
 	}
